@@ -15,6 +15,7 @@ Tags.prototype.listTags = function() {
 Tags.prototype.addTag = function(tag) {
     this._tags = this._tags || [];
     this._tags.push(tag);
+    this.publish && this.publish("tagAdded");
 };
 
 Tags.prototype.removeTag = function(tag) {
@@ -22,4 +23,8 @@ Tags.prototype.removeTag = function(tag) {
 
     var index = this._tags.indexOf(tag);
     this._tags.splice(index, 1);
+};
+
+Tags.prototype.countTags = function() {
+  return this._tags.length;
 };
