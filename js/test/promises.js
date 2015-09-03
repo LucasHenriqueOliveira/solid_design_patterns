@@ -1,10 +1,14 @@
 describe("Promise", function() {
-   it("is resolved", function() {
+   it("is resolved", function(done) {
        var output = "";
-       getJSON("examples/promises.json").then(function(data) {
+       getJSON("./examples/promised.json").then(function(data) {
          output += "JSON got back";
+       }, function(errorData) {
+           expect(output).toBe("JSON got back!", "** Promise Failed. **");
+           done();
        }).then(function() {
            expect(output).toBe("JSON got back!");
+           done();
        });
    });
 });

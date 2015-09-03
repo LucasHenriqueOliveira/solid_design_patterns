@@ -4,7 +4,9 @@ function getJSON(url) {
             dataType: "json",
             url: url,
             success: function(data) { respond(data); },
-            error: function(xhr, status, error) { failure([xhr, status, error])}
+            error: function(xhr, status, error) {
+                failure([xhr, status, error]);
+            }
         });
     });
 
