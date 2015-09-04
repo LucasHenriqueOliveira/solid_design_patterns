@@ -1,13 +1,13 @@
 describe("Promise", function() {
    it("is resolved", function(done) {
        var output = "";
-       getJSON("./examples/promised.json").then(function(data) {
-         output += "JSON got back";
-       }, function(errorData) {
-           expect(output).toBe("JSON got back!", "** Promise Failed. **");
-           done();
-       }).then(function() {
+       getJSON("/solid_design_patterns/examples/promised.json").then(function(data) {
+           output += "JSON got back";
            expect(output).toBe("JSON got back!");
+           done();
+       }).catch(function(error) {
+           // handle errors
+           expect(error).toBe("JSON got back!", "** Promise Failed. **");
            done();
        });
    });
