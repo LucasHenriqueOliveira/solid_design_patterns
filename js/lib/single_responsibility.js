@@ -1,13 +1,31 @@
 var Liker = function() {
-    var that = this;
-    that.like = 1;
-
-    $("#like").on("click", function(e) {
-        e.preventDefault();
-
-        that.like++;
-        $(this).html(that.like);
-
-        $("#like_count").append("<li>"+new Date().toString()+"</li>");
-    });
+    this.like = 1;
+    this.bind();
 };
+
+Liker.prototype = {
+    updateLike : function() {
+        this.like++;
+        this.publish("liked");
+    },
+    render : function() {
+        this.updateButton();
+        this.logEntry();
+    },
+    updateButton : function() {
+        $("#liked").html(this.like);
+    },
+    logEntry : function() {
+        $("#like_count").append("<li>"+new Date().toString()+"</li>");
+    },
+    bind : function() {
+        var that = this;
+        $("#like").on("click", function(e) {
+            e.preventDefault();
+            that.updateLike();
+        });
+        this.subscribe("liked", function() { this.render(); });
+    }
+};
+
+Liker.mixin(PubSub);
