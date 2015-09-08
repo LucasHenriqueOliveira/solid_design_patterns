@@ -12,13 +12,13 @@ Order.prototype = {
         this.items.push(new Item(book));
         this._updateDueDate();
         Library.decrementAvailabilityFor(book);
-    }
+    },
 
-    , process: function() {
+    process: function() {
         this.status = "active";
-    }
+    },
 
-    , terminate: function() {
+    terminate: function() {
         this.items.forEach(function(item) {
             item.clear();
         });
